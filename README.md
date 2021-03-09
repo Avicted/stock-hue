@@ -20,11 +20,11 @@ Red   = regularMarketPrice <= regularMarketOpen
 
 ## Flow
 
-1. The application will search for the first Hue bridge that it can find in the same LAN as the computer running this program.
+1. stock-hue will search for the first Hue bridge that it can find in the same LAN as the computer running stock-hue.
 
-2. The application will generate a new appKey with the bridge.
+2. stock-hue will generate a new appKey with the bridge.
 
-3. The applications checks the price every 3 seconds and compares it to the opening price (regularMarketOpen).
+3. stock-hue checks the price every 3 seconds and compares it to the opening price (regularMarketOpen).
 
 ---
 
