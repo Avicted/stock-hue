@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>stock_hue</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Q42.HueApi" Version="3.17.0" />
+    <PackageReference Include="Q42.HueApi.ColorConverters" Version="3.14.0" />
+    <PackageReference Include="YahooFinanceApi" Version="2.1.2" />
+  </ItemGroup>
+
+</Project>
