@@ -34,7 +34,7 @@ Requires the dotnet cli or you could start the VSCode development container and 
 
 ```bash
 # Linux
-dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained true -c Release
+dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained false -c Release
 
 # Windows
 dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained true -c Release
