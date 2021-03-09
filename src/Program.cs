@@ -10,8 +10,10 @@ using YahooFinanceApi;
 namespace stock_hue {
     class Program {
         public static ILocalHueClient client;
+
         static async Task Main(string[] args) {
             Console.WriteLine("stock-hue started");
+
             IBridgeLocator locator = new HttpBridgeLocator(); // Or: LocalNetworkScanBridgeLocator, MdnsBridgeLocator, MUdpBasedBridgeLocator
 	        var bridges = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(5));
             string bridgeIpAddress = "";
@@ -37,8 +39,7 @@ namespace stock_hue {
             var appKey = await client.RegisterAsync("stock-hue", "stock-hue-runner");
             Console.WriteLine($"appKey: {appKey}");
 
-            while (true)
-            {
+            while (true) {
                 (double regularMarketOpen, double regularMarketPrice) = await GetStockData("GME");
                 if (regularMarketPrice > regularMarketOpen) {
                     await SetLightsToColor(new RGBColor("00FF00"));
@@ -49,20 +50,18 @@ namespace stock_hue {
             }
         }
 
-        public static async Task<Tuple<double, double>> GetStockData(string ticker)
-        {
-            // You could query multiple symbols with multiple fields through the following steps:
+        public static async Task<Tuple<double, double>> GetStockData(string ticker) {
             var securities = await Yahoo.Symbols(ticker).Fields(Field.Symbol, Field.RegularMarketPrice, Field.RegularMarketOpen).QueryAsync();
             var stock = securities[ticker];
             var regularMarketPrice = stock.RegularMarketPrice;
             var regularMarketOpen = stock.RegularMarketOpen;
             string color = regularMarketPrice > regularMarketOpen ? "green" : "red";
             Console.WriteLine($"regularMarketOpen: {regularMarketOpen} regularMarketPrice: {regularMarketPrice} color -> {color}");
+
             return new Tuple<double, double>(regularMarketOpen, regularMarketPrice);
         }
 
-        public static async Task SetLightsToColor(RGBColor color)
-        {
+        public static async Task SetLightsToColor(RGBColor color) {
             var command = new LightCommand();
             command.TurnOn().SetColor(color);            
             await client.SendCommandAsync(command);
